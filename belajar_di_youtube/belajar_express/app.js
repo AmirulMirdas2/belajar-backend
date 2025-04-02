@@ -8,6 +8,7 @@ app.use(express.json());
 
 // routing
 app.use('/api/v1/categories',categoriesRouter);
+
 // listen web
 app.listen(port, ()=> {
     console.log(`Server is running at http://localhost:${port}`);
