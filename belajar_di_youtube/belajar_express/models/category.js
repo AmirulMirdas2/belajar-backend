@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Category extends Model {
     /**
@@ -13,29 +11,34 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Category.init({
-    name: {
-      type:DataTypes.STRING,
-      allowNull: false,
-      unique: {
-        args: true,
-        msg: 'name kategori sudah ada, silahkan masukkan kategori lain'
+  Category.init(
+    {
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: {
+          args: true,
+          msg: "name kategori sudah ada, silahkan masukkan kategori lain",
+        },
+        validate: {
+          notNull: {
+            msg: "inputan data name kategori tidak boleh kosong rawr",
+          },
+        },
       },
-      validate:{
-        notNull: {
-          msg:'inputan data name kategori tidak boleh kosong rawr'
-        }
-      }
+      description: DataTypes.TEXT,
     },
-    description: DataTypes.TEXT
-  }, {
-    hooks: {
-      afterValidate: (category, options) => {
-        category.name = category.name.toLowerCase();
+    {
+      hooks: {
+        afterValidate: (category, options) => {
+          if (category.name) {
+            category.name = category.name.toLowerCase();
+          }
+        },
       },
-    },
-    sequelize,
-    modelName: 'Category',
-  });
+      sequelize,
+      modelName: "Category",
+    }
+  );
   return Category;
 };
