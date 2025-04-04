@@ -1,0 +1,5 @@
+membuat model 
+        -> npx sequelize-cli model:generate --name Category --attributes name:string,description:text 
+
+memasukkan kedalam database mysql
+        -> npx sequelize-cli db:migrate 
