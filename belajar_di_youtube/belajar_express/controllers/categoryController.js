@@ -1,25 +1,43 @@
 const { Category } = require("../models");
 // const category = require("../models/category");
 
-exports.getAllCategories = (req, res) => {
-  res.status(200).json({
-    status: "success",
-    data: [
-      {
-        id: "01",
-        nama: "iphone",
-      },
-      {
-        id: "02",
-        nama: "komputer",
-      },
-      {
-        id: "03",
-        nama: "PC",
-      },
-    ],
-  });
+exports.getAllCategories = async (req, res) => {
+  try {
+    const catogories = await Category.findAll();
+    res.status(200).json({
+      status: "success",
+      data: catogories,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: "fail",
+      message: "Server Down",
+    });
+  }
 };
+
+
+exports.detailCategory = async (req,res) => {
+  try{
+    const id = req.params.id; 
+    const category = await Category.findByPk(id);
+    if(!category){
+      return res.status(404).json({
+        status: "fail",
+        message: "Data tidak ditemukan"
+      })
+    }
+    return res.status(200).json({
+      status: "success",
+      data: category
+    })      
+  } catch(error){
+    return res.status(500).json({
+      status:"fail",
+      message: 'server down'
+    })
+  }
+}
 
 exports.storCategory = async (req, res) => {
   // let name = req.body.name;
@@ -38,7 +56,7 @@ exports.storCategory = async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       status: "fail",
-      error:error.errors
+      error: error.errors,
     });
   }
 };

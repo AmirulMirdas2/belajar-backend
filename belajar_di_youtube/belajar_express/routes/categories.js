@@ -1,10 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { getAllCategories } = require("../controllers/categoryController");
-const { storCategory } = require("../controllers/categoryController");
+const { getAllCategories, storCategory, detailCategory } = require("../controllers/categoryController");
 
+// read all categories
 router.get("/", getAllCategories);
+// detail data
+router.get("/:id", detailCategory);
 
+// create category
 router.post("/", storCategory);
 
 router.get("/filterData", (req, res) => {
