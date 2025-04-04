@@ -1,0 +1,8 @@
+membuat file seeder
+        -> npx sequelize-cli seed:generate --name demo-category
+
+menjalankan seeder
+        -> npx sequelize-cli db:seed:all
+
+melakukan undo
+        -> npx sequelize-cli db:seed:undo:all
