@@ -1,4 +1,5 @@
-// yang mangatur fungsi logic
+const { Category } = require("../models");
+// const category = require("../models/category");
 
 exports.getAllCategories = (req, res) => {
   res.status(200).json({
@@ -6,31 +7,38 @@ exports.getAllCategories = (req, res) => {
     data: [
       {
         id: "01",
-        name: "iphone",
+        nama: "iphone",
       },
       {
         id: "02",
-        name: "komputer",
+        nama: "komputer",
       },
       {
         id: "03",
-        name: "PC",
+        nama: "PC",
       },
-    ]
-  })
-}
+    ],
+  });
+};
 
-exports.storyCategory = (req, res) => {
-  let name = req.body.name;
-  let description = req.body.description; 
-  if (!name && !description) {
+exports.storCategory = async (req, res) => {
+  // let name = req.body.name;
+  // let description = req.body.description;
+
+  try {
+    let { name, description } = req.body;
+    const newCategory = await Category.create({
+      name,
+      description,
+    });
+    res.status(201).json({
+      status: "succsess",
+      data: newCategory,
+    });
+  } catch (error) {
     return res.status(400).json({
-      status: "failed",
-      message: "Validation error"
-    })
+      status: "fail",
+      error:error.errors
+    });
   }
-  return res.status(200).json({
-    status: "success",
-    message: 'yippi'
-  })
-}
+};

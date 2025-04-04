@@ -14,9 +14,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Category.init({
-    name: DataTypes.STRING,
+    name: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      unique: {
+        args: true,
+        msg: 'name kategori sudah ada, silahkan masukkan kategori lain'
+      },
+      validate:{
+        notNull: {
+          msg:'inputan data name kategori tidak boleh kosong rawr'
+        }
+      }
+    },
     description: DataTypes.TEXT
   }, {
+    hooks: {
+      afterValidate: (category, options) => {
+        category.name = category.name.toLowerCase();
+      },
+    },
     sequelize,
     modelName: 'Category',
   });
