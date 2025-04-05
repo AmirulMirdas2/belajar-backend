@@ -1,0 +1,5 @@
+membuat model
+        -> npx sequelize-cli model:generate --name Role --attributes nama:string
+
+menjalankan model setelah disetting
+        -> npx sequelize-cli db:migrate
