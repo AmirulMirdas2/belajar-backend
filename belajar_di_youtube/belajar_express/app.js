@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const categoriesRouter = require("./routes/categories");
 const morgan = require("morgan");
+const AuthRouter = require("./routes/AuthRouter");
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 // routing
 app.use("/api/v1/categories", categoriesRouter);
+app.use("/api/v1/auth", AuthRouter);
 
 // listen web
 const port = process.env.PORT;

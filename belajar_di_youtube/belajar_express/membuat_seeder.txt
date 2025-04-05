@@ -1,0 +1,10 @@
+membuat seeder
+        -> npx sequelize-cli seed:generate --name demo-role
+
+menginstall uuid
+        -> npm install uuid
+        panggil uuid
+                -> const uuidv4 = require('uuid/v4')
+                
+menjalankan seeder apakah berhasil atau tidak
+        -> npx sequelize-cli db:seed --seed (nama file)
