@@ -89,3 +89,27 @@ exports.updateCategory = async (req, res) => {
     });
   }
 };
+
+exports.destrotyCategory = async (req, res) => {
+  const id = req.params.id;
+
+  const idCategory = await Category.findByPk(id);
+
+  if (!idCategory) {
+    return res.status(404).json({
+      status: "fail",
+      message: "Id tidak ditemukan",
+    });
+  }
+
+  await Category.destroy({
+    where: {
+      id,
+    },
+  });
+
+  return res.status(200).json({
+    status: "success",
+    message: `data dengan id ${id}, berhasil dihapus`,
+  });
+};

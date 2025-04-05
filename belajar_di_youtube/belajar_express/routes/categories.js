@@ -5,6 +5,7 @@ const {
   storCategory,
   detailCategory,
   updateCategory,
+  destrotyCategory,
 } = require("../controllers/categoryController");
 
 // read all categories
@@ -15,6 +16,8 @@ router.get("/:id", detailCategory);
 router.post("/", storCategory);
 // update data
 router.put("/:id", updateCategory);
+// delete data
+router.delete("/:id", destrotyCategory);
 
 router.get("/filterData", (req, res) => {
   res.send("router filterData");
