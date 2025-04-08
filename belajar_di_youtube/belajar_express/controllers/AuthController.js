@@ -2,17 +2,17 @@ const { User } = require("../models");
 
 exports.registerUser = async (req, res) => {
   try {
-    let { name, email, password, passwordConfirm } = req.body;
-    if (password !== passwordConfirm) {
+    if (req.body.password !== req.body.passwordConfirm) {
       return res.status(400).json({
-        message: "Password dan password conform tidak sama",
+        message: "Validasi Error",
+        error: ["passwod dan passwordConfirm tidak sama"],
       });
     }
 
     const newUser = await User.create({
-      name,
-      email,
-      password,
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
     });
 
     return res.status(201).json({
@@ -23,7 +23,7 @@ exports.registerUser = async (req, res) => {
     console.log(error);
     return res.status(400).json({
       message: "Validasi Error",
-      error,
+      error: error.errors.map((err) => err.message),
     });
   }
 };
