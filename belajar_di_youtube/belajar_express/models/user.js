@@ -64,5 +64,9 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
   );
+  User.prototype.CorrectPassword = async (reqPassword, passwordDB) => {
+    // berfungsi untuk membandingkan password yang diinputkan dengan password yang ada di database
+    return await bycrypt.compareSync(reqPassword, passwordDB);
+  };
   return User;
 };
