@@ -2,4 +2,4 @@ JWT (Json Web Token)
 
 installasi JWT
         -> npm i jsonwebtoken
-s
+
