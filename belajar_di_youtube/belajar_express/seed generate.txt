@@ -1,0 +1,7 @@
+seed generate
+
+instalasi
+        -> npx sequelize-cli seed:geneare --name demo-user-admin
+
+cara menjalankan setelah berhasil disetting
+        -> npx sequelize-cli db:seed --seed 20250409150021-demo-user-admin.js

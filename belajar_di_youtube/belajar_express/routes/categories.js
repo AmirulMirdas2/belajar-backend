@@ -7,11 +7,12 @@ const {
   updateCategory,
   destrotyCategory,
 } = require("../controllers/categoryController");
+const { authMiddleware } = require("../middleware/UserMiddleware");
 
 // read all categories
 router.get("/", getAllCategories);
 // detail data
-router.get("/:id", detailCategory);
+router.get("/:id", authMiddleware, detailCategory);
 // create category
 router.post("/", storCategory);
 // update data
