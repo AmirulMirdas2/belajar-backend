@@ -33,8 +33,15 @@ exports.authMiddleware = async (req, res, next) => {
   }
 
   // 3) mengambil data user berdasarkan kondisi decoded
-  const currentUser = await User.findByPk(decoded.id);
-  console.log(currentUser);
+  const currentUser = await User.findByPk(decoded.id); // mengambil data user berdasarkan id yang ada di token
+  if (!currentUser) {
+    return next(
+      res.status(401).json({
+        status: 401,
+        message: "user sudah terhapus, token sudah tidak valid",
+      })
+    );
+  }
 
   req.user;
 
