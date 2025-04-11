@@ -16,14 +16,16 @@ exports.registerUser = async (req, res) => {
     }
 
     const newUser = await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
+      // membuat user baru
+      name: req.body.name, // mengambil data name dari body
+      email: req.body.email, // mengambil data email dari body
+      password: req.body.password, // mengambil data password dari body
     });
 
-    const token = signToken(newUser.id);
+    const token = signToken(newUser.id); // generate token dari id user yang baru saja dibuat
 
     return res.status(201).json({
+      // mengembalikan response jika berhasil
       status: "success",
       token,
       data: newUser,

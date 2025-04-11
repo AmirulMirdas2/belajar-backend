@@ -7,18 +7,30 @@ const {
   updateCategory,
   destrotyCategory,
 } = require("../controllers/categoryController");
-const { authMiddleware } = require("../middleware/UserMiddleware");
+const {
+  authMiddleware,
+  permissionUser,
+} = require("../middleware/UserMiddleware");
 
 // read all categories
 router.get("/", getAllCategories);
+
 // detail data
-router.get("/:id", authMiddleware, detailCategory);
-// create category
-router.post("/", storCategory);
+router.get("/:id", detailCategory);
+
+// create Data
+router.post("/", authMiddleware, permissionUser("admin"), storCategory);
+
 // update data
-router.put("/:id", updateCategory);
+router.put("/:id", authMiddleware, permissionUser("admin"), updateCategory);
+
 // delete data
-router.delete("/:id", destrotyCategory);
+router.delete(
+  "/:id",
+  authMiddleware,
+  permissionUser("admin"),
+  destrotyCategory
+);
 
 router.get("/filterData", (req, res) => {
   res.send("router filterData");
