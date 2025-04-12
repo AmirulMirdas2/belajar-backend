@@ -24,7 +24,6 @@ const createSendToken = (user, statusCode, res) => {
   res.status(statusCode).json({
     // jika berhasil maka akan menampilkan data berikut
     status: "Succses",
-    token,
     data: {
       // data user
       user,
