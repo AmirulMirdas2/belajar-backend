@@ -1,4 +1,6 @@
 const { Category } = require("../models");
+const asyncHandle = require("../middleware/asyncHandle");
+const { errorHandler } = require("../middleware/errorMiddleware");
 // const category = require("../models/category");
 
 // read all categories
@@ -41,54 +43,41 @@ exports.detailCategory = async (req, res) => {
 };
 
 // membuat data
-exports.storCategory = async (req, res) => {
+exports.storCategory = asyncHandle(async (req, res) => {
   // let name = req.body.name;
   // let description = req.body.description;
 
-  try {
-    let { name, description } = req.body;
-    const newCategory = await Category.create({
-      name,
-      description,
-    });
-    res.status(201).json({
-      status: "succsess",
-      data: newCategory,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      status: "fail",
-      error: error.errors,
-    });
-  }
-};
+  let { name, description } = req.body;
+  const newCategory = await Category.create({
+    name,
+    description,
+  });
+  res.status(201).json({
+    status: "succsess",
+    data: newCategory,
+  });
+});
 
-exports.updateCategory = async (req, res) => {
-  try {
-    const id = req.params.id;
-    await Category.update(req.body, {
-      where: {
-        id: id,
-      },
-    });
-    const newCategory = await Category.findByPk(id);
-    if (!newCategory) {
-      return res.status(404).json({
-        status: "fail",
-        message: "Id tidak ditemukan",
-      });
-    }
-    return res.status(200).json({
-      status: "success",
-      data: newCategory,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      status: "fail",
-      error: "server down",
-    });
+// update data
+exports.updateCategory = asyncHandle(async (req, res) => {
+  const id = req.params.id;
+  await Category.update(req.body, {
+    where: {
+      id: id,
+    },
+  });
+  const newCategory = await Category.findByPk(id);
+
+  if (!newCategory) {
+    res.status(404);
+    throw new Error("Category tidak ditemukan");
   }
-};
+
+  return res.status(200).json({
+    status: "success",
+    data: newCategory,
+  });
+});
 
 exports.destrotyCategory = async (req, res) => {
   const id = req.params.id;
