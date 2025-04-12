@@ -49,7 +49,7 @@ exports.authMiddleware = async (req, res, next) => {
 };
 
 exports.permissionUser = (...roles) => {
-  // rest parameter
+  // rest parameter = (...roles) digunakan untuk menampung beberapa parameter
   return async (req, res, next) => {
     const rolesData = await Role.findByPk(req.user.role_id); // mengambil data role berdasarkan id role yang ada di user
     const roleName = rolesData.name; // mengambil nama
