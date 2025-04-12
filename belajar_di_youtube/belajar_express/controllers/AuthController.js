@@ -85,3 +85,15 @@ exports.loginUser = async (req, res) => {
   // 3) token di resopon pada saat login
   createSendToken(userData, 200, res); // menggunakan fungsi createSendToken untuk membuat token
 };
+
+// fungsi Logout
+exports.logoutUser = async (req, res) => {
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
+
+  res.status(200).json({
+    message: "Logout Berhasil",
+  });
+};
