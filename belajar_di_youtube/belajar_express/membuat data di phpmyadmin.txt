@@ -1,0 +1,5 @@
+membuat data di phpmyadmin
+        -> npx sequelize-cli model:generate --name Product --attributes name:string,description:string,price:integer,categoryId:integer,image:string,stock:integer
+        
+setelah melakukan setting
+        -> npx sequelize-cli db:migrate
