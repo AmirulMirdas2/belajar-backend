@@ -1,0 +1,4 @@
+Membuat Component
+agar memisahkan kode 
+
+php artisan make:component navbar
