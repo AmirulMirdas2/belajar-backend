@@ -1,0 +1,31 @@
+1. settup awal yaitu mengunduh express dan node
+    a. npm i express node
+
+2. melakukan setting pada package.json didalam script
+    a. "start":"nodemon index.js",
+
+3. membuat file untuk mengaktifkan express
+    a. const express = require('express');
+    b. const app = express();
+
+4. membuat app listen supaya dapat perjalan
+    a. app.listen(4000, ()=>{
+        console.log("server berjalan di http://localhost:4000");
+    });
+
+penjelasan masing-masing folder
+1. src = merupakan tempat penyimpanan kode sumber aplikasi
+2. controller = berisi logika untuk mengatur alur data antara model dan view (fungsi)
+3. model = berisi definisi struktur data dan interaksi dengan database
+4. config = berisi konfigurasi aplikasi, seperti pengaturan database dan variabel lingkungan
+5. routes = berisi definisi endpoint API dan pengaturan rute untuk mengakses controller
+6. middleware = tempat untuk melakukan pengecekan
+
+5. jika ingin membuat fungsi lalu fungsi itu ingin dijalankan di tempaat lain letaklah didalam controller
+    a. module.exports = {fileName}
+    b. const {bebas} = require("{PATH}")
+    
+6. ketika menggunakan .... yang akan di panggil ditempat lain, maka hanya menggunakan const {filename} = (fungsi yang ingin digunakan) 
+
+7. membuat request body berupa json 
+    a. app.use(express.json())
