@@ -29,3 +29,17 @@ penjelasan masing-masing folder
 
 7. membuat request body berupa json 
     a. app.use(express.json())
+
+8. fungsi update harus memiliki id yang spesifik supaya bisa di update
+
+9. cara menginstall mysql
+    a. npm i mysql2
+
+10. settup mysql
+    a. const mysql = require("mysql2")
+    b.  const dbpool = mysql.createPool({
+        host: "localhost",
+        user: "root",
+        password: "lurimamirdas",
+        database: "belajar_express_mysql",
+        });
