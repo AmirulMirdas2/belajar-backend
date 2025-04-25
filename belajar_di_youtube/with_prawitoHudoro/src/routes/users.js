@@ -8,6 +8,9 @@ router.post("/", userController.createNewUsers);
 // READ - GET
 router.get("/", userController.getAllUsers);
 
+// READ - GET (1 user)
+router.get("/:idUser", userController.readOneUser);
+
 // UPDATE - PATCH
 router.patch("/:idUser", userController.updateUsers); // /:id -> params namanya
 

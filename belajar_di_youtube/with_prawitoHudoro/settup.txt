@@ -43,3 +43,7 @@ penjelasan masing-masing folder
         password: "lurimamirdas",
         database: "belajar_express_mysql",
         });
+
+11. settup env  
+    a. npm i dotenv
+    b. require("dotenv").config();
