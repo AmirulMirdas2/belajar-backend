@@ -16,13 +16,13 @@ const createNewUser = (body) => {
 
 // read user
 const readOneUser = (idUser) => {
-  const SQLQuery = `SELECT * FROM users where id = ${idUser}`;
-  return dbpool.execute(SQLQuery);
+  const SQLQuery = `SELECT * FROM users where id = ?`;
+  return dbpool.execute(SQLQuery, [idUser]);
 };
 
 // update user
 const updateUser = (body, idUser) => {
-  const SQLQuery = `UPDATE users SET ${body.name}, ${body.email}, ${body.address} WHERE id = ${idUser}`;
+  const SQLQuery = `UPDATE users SET name='${body.name}', email="${body.email}", address="${body.address}" WHERE id = ${idUser}`;
   return dbpool.execute(SQLQuery);
 };
 
